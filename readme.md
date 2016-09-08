@@ -30,13 +30,14 @@ Command               | Task
 `meta lint`           | Lint source files using `ngryman` configuration ([eslint]).
 `meta see-coverage`   | Open the browser to visualize coverage report ([nyc]).
 `meta test`           | Run the test suite ([ava], [nyc]).
-```
+
 
 ## Install
 
 ```bash
 npm install --save meta-dev
 ```
+
 
 ## Usage
 
