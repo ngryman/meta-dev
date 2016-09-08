@@ -2,13 +2,6 @@
 
 > Meta packages for devDependencies.
 
-[![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
-
-[travis-image]: https://img.shields.io/travis/ngryman/meta-dev.svg?style=flat
-[travis-url]: https://travis-ci.org/ngryman/meta-dev
-[codecov-image]: https://img.shields.io/codecov/c/github/ngryman/meta-dev.svg
-[codecov-url]: https://codecov.io/github/ngryman/meta-dev
-
 
 **meta-dev** is a meta package of `devDependencies` needed for a simple node library. For more details please see the associated [article].
 
