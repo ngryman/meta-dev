@@ -4,7 +4,7 @@ const fs = require('fs')
 const exec = require('child_process').execFileSync
 const path = require('path')
 
-if (isStandalone() || canHoistDependencies()) {
+if (isStandalone() || hasHoistedDependencies()) {
   process.exit(0)
 }
 
@@ -28,7 +28,7 @@ function isStandalone() {
   return ret
 }
 
-function canHoistDependencies() {
+function hasHoistedDependencies() {
   const version = exec('npm', ['--version'], { encoding: 'utf8' })
   return (Number(version[0]) >= 3)
 }
