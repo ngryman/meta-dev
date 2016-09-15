@@ -9,7 +9,7 @@ It includes the following packages:
 
  - [ava]: Test runner.
  - [babel-plugin-transform-es2015-modules-commonjs]: Transpile `es6` imports to
- `commonjs` requires.
+ `commonjs` requires for tests
  - [babel-register]: Used to transpile test files.
  - [codecov.io]: Code coverage reports.
  - [eslint]: Linter.
@@ -17,6 +17,7 @@ It includes the following packages:
  - [jsdoc-to-markdown]: Documentation generator.
  - [nyc]: Coverage analyzer.
  - [rollup]: Bundler.
+ - [rollup-plugin-multi-entry]: Concat multiple files into one.
 
 It expose a `meta` binary which executes common tasks:
 
@@ -94,3 +95,4 @@ MIT © [Nicolas Gryman](http://ngryman.sh)
 [jsdoc-to-markdown]: https://github.com/jsdoc2md/jsdoc-to-markdown
 [nyc]: https://github.com/istanbuljs/nyc
 [rollup]: https://github.com/rollup/rollup
+[rollup-plugin-multi-entry]: https://github.com/rollup/rollup-plugin-multi-entry
