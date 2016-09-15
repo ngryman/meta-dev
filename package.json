@@ -13,7 +13,7 @@
     "package"
   ],
   "bin": {
-    "meta": ".bin/meta.sh"
+    "meta": "bin/meta.sh"
   },
   "scripts": {
     "postinstall": "scripts/hoist-deps.js"
