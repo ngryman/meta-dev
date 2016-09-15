@@ -13,7 +13,7 @@ case $1 in
     ;;
 
   dev)
-    nyc ava --watch
+    ava --watch
     ;;
 
   docs)
