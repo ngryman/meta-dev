@@ -1,7 +1,7 @@
 case $1 in
   build)
-    rollup --format cjs --input index.js --output index.cjs
-    git add index.cjs
+    NODE_ENV=production ./node_modules/meta-dev/scripts/build.js $@
+    git add index.js index.es.js
     ;;
 
   check-coverage)
@@ -18,12 +18,12 @@ case $1 in
 
   docs)
     # todo: https://github.com/jsdoc2md/jsdoc-to-markdown/issues/94
-    cat index.cjs | jsdoc2md > docs/api.md
+    cat index.js | jsdoc2md > docs/api.md
     git add docs/api.md
     ;;
 
   lint)
-    eslint index.js {lib/,test/}**/*.js
+    eslint {lib/,test/}**/*.js
     ;;
 
   see-coverage)
