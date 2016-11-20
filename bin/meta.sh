@@ -21,7 +21,7 @@ case $1 in
     ;;
 
   lint)
-    eslint {lib/,test/}**/*.js
+    eslint *.js {lib,test}/{,**/}*.js
     ;;
 
   see-coverage)
