@@ -16,8 +16,7 @@ case $1 in
     ;;
 
   docs)
-    # todo: https://github.com/jsdoc2md/jsdoc-to-markdown/issues/94
-    cat index.js | jsdoc2md > docs/api.md
+    cat dist/index.node.js | jsdoc2md > docs/api.md
     git add docs/api.md
     ;;
 
