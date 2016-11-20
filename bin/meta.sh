@@ -1,7 +1,6 @@
 case $1 in
   build)
     NODE_ENV=production ./node_modules/meta-dev/scripts/build.js $@
-    git add index.js index.es.js
     ;;
 
   check-coverage)
