@@ -36,6 +36,10 @@ function hasHoistedDependencies() {
 function hoistDeps() {
   const modulesPath = path.resolve(__dirname, '..', 'node_modules')
   const parentModulesPath = path.resolve(__dirname, '..', '..')
+
+  // dependencies have already been hoisted, useful when caching node_modules
+  if (!fs.existsSync(modulesPath)) return
+
   const deps = fs.readdirSync(modulesPath)
 
   deps.forEach(dep => {
