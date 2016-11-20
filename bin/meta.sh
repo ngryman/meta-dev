@@ -16,7 +16,7 @@ case $1 in
     ;;
 
   docs)
-    cat dist/index.node.js | jsdoc2md > docs/api.md
+    cat dist/*.node.js | jsdoc2md > docs/api.md
     git add docs/api.md
     ;;
 
