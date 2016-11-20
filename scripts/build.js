@@ -4,56 +4,42 @@ const fs = require('fs')
 const path = require('path')
 const rollup = require('rollup').rollup
 const babel = require('rollup-plugin-babel')
-const multiEntry = require('rollup-plugin-multi-entry')
+const resolve = require('rollup-plugin-node-resolve')
 
 const rootPath = path.resolve(__dirname, '..', '..', '..')
 
-bundle(readPackage(), (process.argv[3] || 'simple'))
+function build() {
+  const pkg = require(path.join(rootPath, 'package.json'))
 
-/* -------------------------------------------------------------------------- */
-
-function readPackage() {
-  return require(path.join(rootPath, 'package.json'))
+  return Promise.all([
+    bundle(pkg, 'node', 'cjs', true),
+    bundle(pkg, 'browser', 'umd', false)
+  ])
 }
 
-function bundle(pkg, type) {
-  const options = ('simple' === type ?
-    bundleSimpleOptions(pkg) :
-    bundleLibOptions(pkg)
-  )
-
-  rollup(options)
-  .then(bundle => Promise.all([
-    bundle.write({
-      dest: path.join(rootPath, 'index.es.js'),
-      format: 'es'
-    }),
-    bundle.write({
-      dest: path.join(rootPath, 'index.js'),
-      format: 'umd',
+function bundle(pkg, target, format, external) {
+  return rollup(optionsFor(pkg, external)).then(function(bundle) {
+    return bundle.write({
+      dest: path.join(rootPath, 'dist', `${pkg.name}.${target}.js`),
+      format: format,
       moduleName: pkg.name.replace(/-(\w)/, g => g[1].toUpperCase())
     })
-  ]))
-  .catch(err => console.log(err.message))
+  })
+  .catch(function(err) { console.log(err.message) })
 }
 
-function bundleSimpleOptions(pkg) {
+function optionsFor(pkg, external) {
   return {
-    entry: path.join(rootPath, 'lib', `${pkg.name}.js`),
+    entry: path.join(rootPath, 'index.js'),
+    external: external ? Object.keys(pkg.dependencies) : null,
     plugins: [
+      resolve(),
       babel({ exclude: 'node_modules/**' })
     ],
-    onwarn: () => {}
+    onwarn: function() {}
   }
 }
 
-function bundleLibOptions(pkg) {
-  return {
-    entry: path.join(rootPath, 'lib', '*.js'),
-    plugins: [
-      babel({ exclude: 'node_modules/**' }),
-      multiEntry()
-    ],
-    onwarn: () => {}
-  }
-}
+/* ────────────────────────────────────────────────────────────────────────── */
+
+build()
