@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "ava": "^0.17.0",
+    "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-register": "^6.18.0",
     "codecov.io": "^0.1.6",
