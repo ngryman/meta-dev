@@ -8,20 +8,27 @@ const resolve = require('rollup-plugin-node-resolve')
 
 const rootPath = path.resolve(__dirname, '..', '..', '..')
 
-function optionsFor(pkg, external) {
+function optionsFor(pkg, target, external) {
   return {
     entry: path.join(rootPath, 'index.js'),
     external: external ? Object.keys(pkg.dependencies) : null,
     plugins: [
       resolve(),
-      babel({ exclude: 'node_modules/**' })
+      babel({
+        exclude: 'node_modules/**',
+        presets: [
+          'node' === target
+            ? ['node5', { modules: false }]
+            : 'es2015'
+        ]
+      })
     ],
     onwarn: function() {}
   }
 }
 
 function bundle(pkg, target, format, external) {
-  return rollup(optionsFor(pkg, external)).then(function(bundle) {
+  return rollup(optionsFor(pkg, target, external)).then(function(bundle) {
     return bundle.write({
       dest: path.join(rootPath, 'dist', `${pkg.name}.${target}.js`),
       format: format,
