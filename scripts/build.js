@@ -8,13 +8,16 @@ const resolve = require('rollup-plugin-node-resolve')
 
 const rootPath = path.resolve(__dirname, '..', '..', '..')
 
-function build() {
-  const pkg = require(path.join(rootPath, 'package.json'))
-
-  return Promise.all([
-    bundle(pkg, 'node', 'cjs', true),
-    bundle(pkg, 'browser', 'umd', false)
-  ])
+function optionsFor(pkg, external) {
+  return {
+    entry: path.join(rootPath, 'index.js'),
+    external: external ? Object.keys(pkg.dependencies) : null,
+    plugins: [
+      resolve(),
+      babel({ exclude: 'node_modules/**' })
+    ],
+    onwarn: function() {}
+  }
 }
 
 function bundle(pkg, target, format, external) {
@@ -28,18 +31,13 @@ function bundle(pkg, target, format, external) {
   .catch(function(err) { console.log(err.message) })
 }
 
-function optionsFor(pkg, external) {
-  return {
-    entry: path.join(rootPath, 'index.js'),
-    external: external ? Object.keys(pkg.dependencies) : null,
-    plugins: [
-      resolve(),
-      babel({ exclude: 'node_modules/**' })
-    ],
-    onwarn: function() {}
-  }
+function build() {
+  const pkg = require(path.join(rootPath, 'package.json'))
+
+  return Promise.all([
+    bundle(pkg, 'node', 'cjs', true),
+    bundle(pkg, 'browser', 'umd', false)
+  ])
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-
-build()
+module.exports = build
