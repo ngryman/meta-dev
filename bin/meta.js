@@ -10,6 +10,7 @@ const rootPath = path.resolve(__dirname, '..', 'node_modules', '.bin')
 
 function execute(command, args, env) {
   const child = spawn(command, args.split(' '), {
+    stdio: 'inherit',
     env: {
       NODE_ENV: env,
       PATH: rootPath + ':' + process.env.PATH
