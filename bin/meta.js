@@ -43,7 +43,7 @@ const commands = {
     )
   },
   lint: function() {
-    execute('eslint', '*.js {lib,test}/{,**/}*.js')
+    execute('eslint', '--color *.js {lib,test}/{,**/}*.js')
   },
   seeCoverage: function() {
     exec(
