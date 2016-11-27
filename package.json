@@ -19,9 +19,7 @@
     "bin",
     "scripts"
   ],
-  "scripts": {
-    "postinstall": "scripts/hoist-deps.js"
-  },
+  "scripts": {},
   "dependencies": {
     "ava": "^0.17.0",
     "babel-plugin-istanbul": "^3.0.0",

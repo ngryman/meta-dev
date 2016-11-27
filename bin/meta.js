@@ -1,22 +1,19 @@
 #!/usr/bin/env node
 'use strict'
 
+const spawn = require('child_process').spawn
 const exec = require('child_process').exec
+const path = require('path')
 const build = require('../scripts/build')
 
-function execute(command, env) {
-  if (env) {
-    process.env.NODE_ENV = env
-  }
+const rootPath = path.resolve(__dirname, '..', 'node_modules', '.bin')
 
-  exec(command, (error, stdout, stderr) => {
-    if (stderr) {
-      console.error(stderr)
+function execute(command, args, env) {
+  const child = spawn(command, args.split(' '), {
+    env: {
+      NODE_ENV: env,
+      PATH: rootPath + ':' + process.env.PATH
     }
-    if (stdout) {
-      console.log(stdout)
-    }
-    process.env.NODE_ENV = 'development'
   })
 }
 
@@ -27,25 +24,31 @@ const commands = {
     process.env.NODE_ENV = 'development'
   },
   checkCoverage: function() {
-    execute('nyc check-coverage --lines 95 --functions 95 --branches 95', 'test')
+    execute('nyc', 'check-coverage --lines 95 --functions 95 --branches 95')
   },
   coverage: function() {
-    execute('nyc report --reporter=text-lcov | codecov')
+    execute('nyc', 'report --reporter=text-lcov | codecov')
   },
   dev: function() {
-    execute('ava --watch', 'test')
+    execute('ava', '--watch', 'test')
   },
   docs: function() {
-    execute('cat dist/*.node.js | jsdoc2md > docs/api.md && git add docs/api.md')
+    exec(
+      'cat dist/*.node.js | jsdoc2md > docs/api.md && git add docs/api.md',
+      function(error, stdout, stderr) {
+        if (stderr) console.error(stderr)
+        if (stdout) console.error(stdout)
+      }
+    )
   },
   lint: function() {
-    execute('eslint *.js {lib,test}/{,**/}*.js')
+    execute('eslint', '*.js {lib,test}/{,**/}*.js')
   },
   seeCoverage: function() {
-    execute('nyc report --reporter=html && open coverage/index.html')
+    execute('nyc', 'report --reporter=html && open coverage/index.html')
   },
   test: function() {
-    execute('nyc ava')
+    execute('nyc', 'ava', 'test')
   }
 }
 
