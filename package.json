@@ -1,7 +1,7 @@
 {
   "name": "meta-dev",
   "version": "0.3.6",
-  "description": "Meta package of a simple node library",
+  "description": "Meta dependency package for simple Node libraries",
   "author": "Nicolas Gryman <ngryman@gmail.com> (http://ngryman.sh/)",
   "license": "MIT",
   "repository": "ngryman/meta-dev",
@@ -21,7 +21,7 @@
   "dependencies": {
     "ava": "^0.17.0",
     "babel-plugin-istanbul": "^3.0.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-preset-node5": "^0.12.0",
     "babel-register": "^6.18.0",
     "codecov.io": "^0.1.6",
     "eslint": "^3.10.2",
