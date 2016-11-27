@@ -8,8 +8,7 @@
 It includes the following packages:
 
  - [ava]: Test runner.
- - [babel-plugin-transform-es2015-modules-commonjs]: Transpile `es6` imports to
- `commonjs` requires for tests
+ - [babel-preset-node5]: Transpile to `es6` using already implemented stuff in `node 5+`.
  - [babel-register]: Used to transpile test files.
  - [codecov.io]: Code coverage reports.
  - [eslint]: Linter.
