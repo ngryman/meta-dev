@@ -46,7 +46,13 @@ const commands = {
     execute('eslint', '*.js {lib,test}/{,**/}*.js')
   },
   seeCoverage: function() {
-    execute('nyc', 'report --reporter=html && open coverage/index.html')
+    exec(
+      'nyc report --reporter=html && open coverage/index.html',
+      function(error, stdout, stderr) {
+        if (stderr) console.error(stderr)
+        if (stdout) console.error(stdout)
+      }
+    )
   },
   test: function() {
     execute('nyc', 'ava', 'test')
@@ -55,11 +61,18 @@ const commands = {
 
 /* ────────────────────────────────────────────────────────────────────────── */
 
-const commandName = process.argv[2]
+if (process.argv.length < 3) {
+  console.error('No command specified')
+  process.exit(1)
+}
+
+const commandName = process.argv[2].replace(/-([a-z])/g, function(g) {
+  return g[1].toUpperCase()
+})
 const command = commands[commandName]
 
 if (null != command) {
-  command()
+  command(command)
 }
 else {
   console.error('Command not found: ' + commandName)
