@@ -1,6 +1,6 @@
 # meta-dev
 
-> Meta packages for devDependencies.
+> Meta package for devDependencies.
 
 
 **meta-dev** is a meta package of `devDependencies` needed for a simple node library. For more details please see the associated [article].
@@ -86,7 +86,7 @@ MIT © [Nicolas Gryman](http://ngryman.sh)
 
 [article]: https://medium.com/@ngryman/bundle-your-devdependencies-and-chill-421949bfd9a5
 [ava]: https://github.com/avajs/ava
-[babel-plugin-transform-es2015-modules-commonjs]: https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-es2015-modules-commonjs
+[babel-preset-node5]: https://github.com/leebenson/babel-preset-node5
 [babel-register]: https://github.com/babel/babel/tree/master/packages/babel-register
 [codecov.io]: https://github.com/cainus/codecov.io
 [eslint]: https://github.com/eslint/eslint
