@@ -55,7 +55,7 @@ const commands = {
     )
   },
   test: function() {
-    execute('nyc', 'ava', 'test')
+    execute('nyc', 'ava --color', 'test')
   }
 }
 
