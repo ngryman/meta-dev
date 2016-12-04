@@ -45,11 +45,17 @@ npm install --save meta-dev
 
 ```javascript
 {
-  "main": "index.cjs",
+  "main": "dist/${packageName}.node.js",
+  "browser": "dist/${packageName}.browser.js",
+  "module": "index.js",
   "jsnext:main": "index.js",
   "engines": {
-    "node": ">=4"
+    "node": ">=5"
   },
+  "files": [
+    "index.js",
+    "dist/"
+  ],
   "scripts": {
     "lint": "meta lint",
     "pretest": "npm run lint -s",
@@ -60,20 +66,45 @@ npm install --save meta-dev
     "check-coverage": "meta check-coverage",
     "docs": "meta docs",
     "prebuild": "npm run lint -s",
-    "build": "meta build"
+    "build": "meta build",
+    "prepublish": "npm run build -s"
   },
-  "devDependencies": {
-    "meta": "0.0.1"
-  },
+  "precommit": [
+    "test",
+    "check-coverage",
+    "docs"
+  ],
   "ava": {
     "require": [
       "babel-register"
     ]
   },
   "babel": {
-    "plugins": [
-      "babel-plugin-transform-es2015-modules-commonjs"
-    ]
+    "env": {
+      "test": {
+        "presets": [
+          "node5"
+        ],
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": "ngryman"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "meta-dev": "^0.4.0",
+    "pre-commit": "^1.1.3"
   }
 }
 ```
