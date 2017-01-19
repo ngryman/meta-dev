@@ -7,8 +7,7 @@ const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
 
-// const rootPath = path.resolve(__dirname, '..', '..', '..')
-const rootPath = path.resolve('/Users/ngryman/Projects/tree-crawl')
+const rootPath = path.resolve(__dirname, '..', '..', '..')
 
 function optionsFor(pkg, target, external) {
   return {
