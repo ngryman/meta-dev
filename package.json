@@ -1,6 +1,6 @@
 {
   "name": "meta-dev",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Meta dependency package for simple Node libraries",
   "author": "Nicolas Gryman <ngryman@gmail.com> (http://ngryman.sh/)",
   "license": "MIT",
