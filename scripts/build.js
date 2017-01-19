@@ -4,9 +4,11 @@ const fs = require('fs')
 const path = require('path')
 const rollup = require('rollup').rollup
 const babel = require('rollup-plugin-babel')
+const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
 
-const rootPath = path.resolve(__dirname, '..', '..', '..')
+// const rootPath = path.resolve(__dirname, '..', '..', '..')
+const rootPath = path.resolve('/Users/ngryman/Projects/tree-crawl')
 
 function optionsFor(pkg, target, external) {
   return {
@@ -14,12 +16,11 @@ function optionsFor(pkg, target, external) {
     external: external ? Object.keys(pkg.dependencies) : null,
     plugins: [
       resolve(),
+      commonjs(),
       babel({
         exclude: 'node_modules/**',
         presets: [
-          'node' === target
-            ? ['node5', { modules: false }]
-            : 'es2015'
+          ['node' === target ? 'node5' : 'es2015', { modules: false }]
         ]
       })
     ],

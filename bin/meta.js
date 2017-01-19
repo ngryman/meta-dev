@@ -35,7 +35,7 @@ const commands = {
   },
   docs: function() {
     exec(
-      'cat dist/*.node.js | jsdoc2md > docs/api.md && git add docs/api.md',
+      'jsdoc2md --files dist/*.node.js > docs/api.md && git add docs/api.md',
       function(error, stdout, stderr) {
         if (stderr) console.error(stderr)
         if (stdout) console.error(stdout)
