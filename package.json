@@ -28,7 +28,7 @@
     "codecov.io": "^0.1.6",
     "eslint": "^3.11.0",
     "eslint-config-ngryman": "^1.7.1",
-    "jsdoc-to-markdown": "^2.0.1",
+    "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^10.0.0",
     "rollup": "^0.41.1",
     "rollup-plugin-babel": "^2.6.1",
