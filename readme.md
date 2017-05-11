@@ -1,5 +1,7 @@
 # meta-dev
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ngryman/meta-dev.svg)](https://greenkeeper.io/)
+
 > Meta package for devDependencies.
 
 
